@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cj1ag2uj1hb3f"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_jm0fk"]
+[ext_resource type="PackedScene" uid="uid://7biwn6rgiuhg" path="res://Scenes/hud.tscn" id="2_xfwa3"]
+[ext_resource type="PackedScene" uid="uid://cpy1qoooa0rx5" path="res://Scenes/mpManager.tscn" id="3_uok8v"]
+[ext_resource type="Script" path="res://Scripts/PlayerContainer.gd" id="4_e6uqh"]
+[ext_resource type="Texture2D" uid="uid://bewua3ft2qxyp" path="res://Assets/Sprites/kenney_top-down-tanks/PNG/Environment/treeLarge.png" id="4_jh3t8"]
+[ext_resource type="Script" path="res://Scripts/BulletContainer.gd" id="5_g5lk4"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_jm0fk")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UILayer" instance=ExtResource("2_xfwa3")]
+
+[node name="MPManager" parent="UILayer" instance=ExtResource("3_uok8v")]
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+script = ExtResource("4_e6uqh")
+
+[node name="PlayerSpawnPos1" type="Marker2D" parent="PlayerContainer"]
+position = Vector2(172, 300)
+
+[node name="PlayerSpawnPos2" type="Marker2D" parent="PlayerContainer"]
+position = Vector2(942, 300)
+
+[node name="BulletContainer" type="Node2D" parent="."]
+script = ExtResource("5_g5lk4")
+
+[node name="Enviroment" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Enviroment"]
+position = Vector2(573, 107.5)
+texture = ExtResource("4_jh3t8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Enviroment"]
+position = Vector2(991, 519)
+texture = ExtResource("4_jh3t8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Enviroment"]
+position = Vector2(221, 510)
+texture = ExtResource("4_jh3t8")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("../PlayerContainer")
+
+[connection signal="child_entered_tree" from="PlayerContainer" to="PlayerContainer" method="_on_child_entered_tree"]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://btbp10700wojh"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_fhbmk"]
+[ext_resource type="Texture2D" uid="uid://up63xt607r0c" path="res://Assets/Sprites/kenney_top-down-tanks/PNG/Tanks/tankBlue_outline.png" id="2_ye6hp"]
+[ext_resource type="Texture2D" uid="uid://cq3e3o7vyo6g6" path="res://Assets/Sprites/kenney_top-down-tanks/PNG/Tanks/barrelBlue_outline.png" id="3_qtm57"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_un600"]
+size = Vector2(88, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4wiv"]
+size = Vector2(88, 88)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q3rkj"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("Body/Gun:rotation")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[node name="Tank" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_fhbmk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_un600")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="TankBody" type="Sprite2D" parent="Body"]
+position = Vector2(0, -2.87747e-07)
+rotation = 4.71239
+texture = ExtResource("2_ye6hp")
+
+[node name="Gun" type="Node2D" parent="Body"]
+rotation = 3.14159
+
+[node name="Barrel" type="Sprite2D" parent="Body/Gun"]
+position = Vector2(20, 0)
+rotation = 1.5708
+texture = ExtResource("3_qtm57")
+
+[node name="Muzzle" type="Marker2D" parent="Body/Gun"]
+position = Vector2(67, 0.000169857)
+rotation = -3.14159
+
+[node name="Area2D" type="Area2D" parent="Body"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Area2D"]
+shape = SubResource("RectangleShape2D_a4wiv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_q3rkj")

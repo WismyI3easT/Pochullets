@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://um5bc316pigi"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_hpf8i"]
+[ext_resource type="Texture2D" uid="uid://gm7k0orecrtv" path="res://Assets/Sprites/kenney_top-down-tanks/PNG/Bullets/bulletBlue_outline.png" id="1_w3kfr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utfmg"]
+size = Vector2(20, 34)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_hpf8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_utfmg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.57079
+texture = ExtResource("1_w3kfr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-37, 0)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

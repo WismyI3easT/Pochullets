@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj1ag2uj1hb3f"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_jm0fk"]
+[ext_resource type="PackedScene" uid="uid://btbp10700wojh" path="res://Scenes/tank.tscn" id="2_3e1tg"]
+[ext_resource type="PackedScene" uid="uid://um5bc316pigi" path="res://Scenes/bullet.tscn" id="3_q8kgb"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_jm0fk")
+
+[node name="Player" parent="." instance=ExtResource("2_3e1tg")]
+position = Vector2(262, 168)
+rotation = 3.14159
+
+[node name="Bullet" parent="." instance=ExtResource("3_q8kgb")]
+position = Vector2(577, 427)
+speed = null
+
+[node name="PlayerSpawnPos" type="Marker2D" parent="."]
+position = Vector2(250, 300)
+
+[node name="BulletContainer" type="Node2D" parent="."]
