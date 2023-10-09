@@ -50,9 +50,14 @@ text = "Host"
 layout_mode = 2
 text = "Join"
 
-[node name="AdressEntry" type="LineEdit" parent="MainMenu/MarginContainer/VBoxContainer"]
+[node name="AddressEntry" type="LineEdit" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-placeholder_text = "IP Adress"
+placeholder_text = "IP"
+alignment = 1
+
+[node name="PortEntry" type="LineEdit" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Port"
 alignment = 1
 
 [connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]

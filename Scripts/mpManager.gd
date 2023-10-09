@@ -2,11 +2,13 @@
 extends Control
 
 @onready var main_menu = $MainMenu
-@onready var adress_entry = $MainMenu/MarginContainer/VBoxContainer/AdressEntry
+@onready var address_entry = $MainMenu/MarginContainer/VBoxContainer/AddressEntry
+@onready var port_entry = $MainMenu/MarginContainer/VBoxContainer/PortEntry
 
 @export var player_scene: PackedScene
 
-const PORT = 135
+var ip_address = "localhost"
+var port = "696969"
 
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -20,7 +22,7 @@ func add_player(peer_id):
 func _on_host_button_pressed():
 	main_menu.hide()
 
-	enet_peer.create_server(PORT)
+	enet_peer.create_server(port)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 
@@ -30,7 +32,12 @@ func _on_host_button_pressed():
 func _on_join_button_pressed():
 	main_menu.hide()
 
-	enet_peer.create_client("localhost", PORT)
-	multiplayer.multiplayer_peer = enet_peer
+	if !address_entry.text.is_empty():
+		ip_address = address_entry.text
 
+	if !port_entry.text.is_empty():
+		port = port_entry.text
+
+	enet_peer.create_client(ip_address, port)
+	multiplayer.multiplayer_peer = enet_peer
 
