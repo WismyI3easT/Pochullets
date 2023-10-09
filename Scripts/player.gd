@@ -1,3 +1,4 @@
+# player.gd
 extends CharacterBody2D
 
 class_name Player
@@ -11,6 +12,8 @@ signal bullet_shot(bullet_scene, location, rotation)
 	"move_speed": 200,
 	"rotation_speed": 4,
 	"fire_rate": 0.5,
+	"bullet_speed": 500,
+	"bullet_damage": 25,
 }
 
 var bullet_scene = preload("res://Scenes/bullet.tscn")
@@ -52,3 +55,7 @@ func _physics_process(delta):
 func shoot():
 	bullet_shot.emit(bullet_scene, muzzle.global_position, $Body/Gun.global_rotation)
 
+func apply_damage(damage):
+	stats.health -= damage
+	if stats.health <= 0:
+		queue_free()

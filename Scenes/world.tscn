@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_jm0fk"]
 [ext_resource type="PackedScene" uid="uid://7biwn6rgiuhg" path="res://Scenes/hud.tscn" id="2_xfwa3"]
 [ext_resource type="PackedScene" uid="uid://cpy1qoooa0rx5" path="res://Scenes/mpManager.tscn" id="3_uok8v"]
-[ext_resource type="Script" path="res://Scripts/PlayerContainer.gd" id="4_e6uqh"]
+[ext_resource type="Script" path="res://Scripts/playerContainer.gd" id="4_bgo0u"]
 [ext_resource type="Texture2D" uid="uid://bewua3ft2qxyp" path="res://Assets/Sprites/kenney_top-down-tanks/PNG/Environment/treeLarge.png" id="4_jh3t8"]
-[ext_resource type="Script" path="res://Scripts/BulletContainer.gd" id="5_g5lk4"]
+[ext_resource type="Script" path="res://Scripts/bulletContainer.gd" id="5_ti371"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_jm0fk")
@@ -17,7 +17,7 @@ script = ExtResource("1_jm0fk")
 [node name="MPManager" parent="UILayer" instance=ExtResource("3_uok8v")]
 
 [node name="PlayerContainer" type="Node2D" parent="."]
-script = ExtResource("4_e6uqh")
+script = ExtResource("4_bgo0u")
 
 [node name="PlayerSpawnPos1" type="Marker2D" parent="PlayerContainer"]
 position = Vector2(172, 300)
@@ -26,7 +26,7 @@ position = Vector2(172, 300)
 position = Vector2(942, 300)
 
 [node name="BulletContainer" type="Node2D" parent="."]
-script = ExtResource("5_g5lk4")
+script = ExtResource("5_ti371")
 
 [node name="Enviroment" type="Node2D" parent="."]
 

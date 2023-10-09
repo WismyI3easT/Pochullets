@@ -1,3 +1,4 @@
+# playerContainer.gd
 extends Node2D
 
 @onready var player = preload("res://Scenes/player.tscn")
@@ -22,6 +23,7 @@ func _on_child_entered_tree(node):
 
 func _on_player_bullet_shot(bullet_scene, location, _rotation):
 	var bullet = bullet_scene.instantiate()
+	bullet.damage = 100
 	bullet.global_position = location
 	bullet.rotation = _rotation
 	find_parent("World").find_child("BulletContainer").add_child(bullet)
