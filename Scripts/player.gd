@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 class_name Player
 
-signal bullet_shot(bullet_scene, location, rotation)
 
 @onready var muzzle = $Body/Gun/Muzzle
 
@@ -17,7 +16,9 @@ signal bullet_shot(bullet_scene, location, rotation)
 }
 
 var bullet_scene = preload("res://Scenes/bullet.tscn")
+
 var shoot_cd := false
+
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
@@ -53,7 +54,14 @@ func _physics_process(delta):
 
 @rpc("call_local")
 func shoot():
-	bullet_shot.emit(bullet_scene, muzzle.global_position, $Body/Gun.global_rotation)
+	var bullet = bullet_scene.instantiate()
+	bullet.shooter_id = get_instance_id()
+	bullet.damage = stats.bullet_damage
+	bullet.speed = stats.bullet_speed
+	get_parent().add_child(bullet)
+	bullet.global_position = $Body/Gun/Muzzle.global_position
+	bullet.rotation = $Body/Gun.global_rotation
+
 
 func apply_damage(damage):
 	stats.health -= damage

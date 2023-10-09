@@ -18,13 +18,3 @@ func _on_child_entered_tree(node):
 
 		current_player += 1
 
-		node.bullet_shot.connect(_on_player_bullet_shot)
-
-
-func _on_player_bullet_shot(bullet_scene, location, _rotation):
-	var bullet = bullet_scene.instantiate()
-	bullet.damage = 100
-	bullet.global_position = location
-	bullet.rotation = _rotation
-	find_parent("World").find_child("BulletContainer").add_child(bullet)
-
