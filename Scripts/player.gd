@@ -37,18 +37,18 @@ func _physics_process(delta):
 		var desired_rotation = rad_to_deg(direction.angle())
 		var delta_rotation = fmod(desired_rotation - rotation_degrees + 360.0, 360.0) - 180.0
 		rotation_degrees += delta_rotation * stats.rotation_speed * delta
-		
+
 	if Input.is_action_pressed("shoot"):
 		if !shoot_cd:
 			shoot_cd = true
-			shoot()
+			shoot.rpc()
 			await get_tree().create_timer(stats.fire_rate).timeout
 			shoot_cd = false
 
 	move_and_slide()
 	$Body/Gun.look_at(get_global_mouse_position())
 
-
+@rpc("call_local")
 func shoot():
 	bullet_shot.emit(bullet_scene, muzzle.global_position, $Body/Gun.global_rotation)
 

@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Bullet
+
 @export var bullet_speed = 500
 
 func _physics_process(delta):
